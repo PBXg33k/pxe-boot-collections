@@ -1,0 +1,65 @@
+ DEFAULT      vesamenu.c32
+ PROMPT       0
+ NOESCAPE     0
+ ALLOWOPTIONS 0
+ # Timeout in units of 1/10 s
+ TIMEOUT 300
+ MENU MARGIN 10
+ MENU ROWS 16
+ MENU TABMSGROW 21
+ MENU TIMEOUTROW 26
+ MENU COLOR BORDER 30;44		#20ffffff #00000000 none
+ MENU COLOR SCROLLBAR 30;44		#20ffffff #00000000 none
+ MENU COLOR TITLE 0 		#ffffffff #00000000 none
+ MENU COLOR SEL   30;47		#40000000 #20ffffff
+ MENU BACKGROUND MyMenuBackgroundPicture640x480.jpg
+ MENU TITLE PXE Boot Menu
+ #---
+ LABEL wds
+ MENU LABEL Windows Deployment Services
+ KERNEL pxeboot.0
+ #---
+ label debian8-7expert
+ menu label ^Debian 8.7 Expert install:
+ kernel /Linux/Debian/8.7/linux
+ append priority=low vga=normal initrd=/Linux/Debian/8.7/initrd.gz -- 
+ #-- 
+ label debian8-7rescue
+ menu label ^Debian 8.7 Rescue mode
+ kernel /Linux/Debian/8.7/linux
+ append vga=normal initrd=/Linux/Debian/8.7/initrd.gz rescue/enable=true -- quiet 
+ #-- 
+ label debian8-7auto
+ menu label ^Debian 8.7 Automated install
+ kernel /Linux/Debian/8.7/linux
+ append auto=true priority=critical vga=normal initrd=/Linux/Debian/8.7/initrd.gz -- quiet 
+ #---
+ label ubuntu-expert
+ menu label ^Ubuntu 16.04 Expert install
+ kernel /linux/ubuntu/16.04/linux
+ append priority=low vga=normal initrd=/linux/ubuntu/16.04/initrd.gz -- 
+ #-- 
+ label ubuntu-cli-expert
+ menu label Ubuntu 16.04 Command-line expert install
+ kernel /linux/ubuntu/16.04/linux
+ append tasks=standard pkgsel/language-pack-patterns= pkgsel/install-language-support=false priority=low vga=normal initrd=/linux/ubuntu/16.04/initrd.gz -- 
+ #--
+ label ubuntu-rescue
+ menu label Ubuntu 16.04 Rescue mode
+ kernel /linux/ubuntu/16.04/linux
+ append vga=normal initrd=/linux/ubuntu/16.04/initrd.gz rescue/enable=true -- quiet 
+ #---
+ label kubuntu
+ menu label ^Kubuntu 16.04 install
+ kernel /linux/ubuntu/16.04/linux
+ append priority=low vga=normal initrd=/linux/ubuntu/16.04/initrd.gz url=http://people.canonical.com/~cjwatson/bzr/debian-cd/ubuntu/data/natty/preseed/kubuntu/kubuntu.seed --
+ #---
+ LABEL Abort
+ MENU LABEL Abort
+ Kernel	abortpxe.0
+ #---
+ LABEL local 
+ MENU DEFAULT
+ MENU LABEL Boot from Harddisk
+ LOCALBOOT 0
+ Type 0x80

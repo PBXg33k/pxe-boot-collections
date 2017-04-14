@@ -1,0 +1,60 @@
+ DEFAULT      vesamenu.c32
+ PROMPT       0
+ NOESCAPE     0
+ ALLOWOPTIONS 0
+ # Timeout in units of 1/10 s
+ TIMEOUT 300
+ MENU MARGIN 10
+ MENU ROWS 16
+ MENU TABMSGROW 21
+ MENU TIMEOUTROW 26
+ MENU COLOR BORDER 30;44		#20ffffff #00000000 none
+ MENU COLOR SCROLLBAR 30;44		#20ffffff #00000000 none
+ MENU COLOR TITLE 0 		#ffffffff #00000000 none
+ MENU COLOR SEL   30;47		#40000000 #20ffffff
+ MENU BACKGROUND MyMenuBackgroundPicture640x480.jpg
+ MENU TITLE PXE Boot Menu
+ #---
+ LABEL wds
+ MENU LABEL Windows Deployment Services
+ KERNEL pxeboot.0
+ #-- 
+ label debian8-7amd64expert
+ menu label ^Debian 8.7 amd64 Expert install
+ kernel /Linux/Debian/8.7/linux-amd64
+ append priority=low vga=normal initrd=/Linux/Debian/8.7/initrd-amd64.gz -- 
+ #-- 
+ label debian8-7amd64rescue
+ menu label ^Debian 8.7 amd64 Rescue mode
+ kernel /Linux/Debian/8.7/linux-amd64
+ append vga=normal initrd=/Linux/Debian/8.7/initrd-amd64.gz rescue/enable=true -- quiet 
+ #--
+ label debian8-7amd64auto
+ menu label ^Debian 8.7 amd64 Automated install
+ kernel /Linux/Debian/8.7/linux-amd64
+ append auto=true priority=critical vga=normal initrd=/Linux/Debian/8.7/initrd-amd64.gz -- quiet 
+ #-- 
+ label ubuntu-expert-amd64
+ menu label ^Ubuntu-amd64 16.04 Expert install
+ kernel /linux/ubuntu/16.04/linux-amd64
+ append priority=low vga=normal initrd=/linux/ubuntu/16.04/initrd-amd64.gz -- 
+ #-- 
+ label ubuntu-amd64-cli-expert
+ menu label Ubuntu-amd64 16.04 Command-line expert install
+ kernel /linux/ubuntu/16.04/linux-amd64
+ append tasks=standard pkgsel/language-pack-patterns= pkgsel/install-language-support=false priority=low vga=normal initrd=/linux/ubuntu/16.04/initrd-amd64.gz -- 
+ #-- 
+ label ubuntu-amd64-rescue
+ menu label Ubuntu-amd64 16.04 Rescue mode
+ kernel /linux/ubuntu/16.04/linux-amd64
+ append vga=normal initrd=/linux/ubuntu/16.04/initrd-amd64.gz rescue/enable=true -- quiet
+ #---
+ LABEL Abort
+ MENU LABEL Abort
+ Kernel	abortpxe.0
+ #---
+ LABEL local 
+ MENU DEFAULT
+ MENU LABEL Boot from Harddisk
+ LOCALBOOT 0
+ Type 0x80
